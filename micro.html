@@ -200,7 +200,7 @@
         <div class="p-4 flex items-center justify-center border-b border-border-light dark:border-border-dark h-16">
             <h1 class="text-2xl font-bold text-primary-dark dark:text-primary-light flex items-center gap-2">
                 <span class="material-symbols-outlined text-3xl">school</span>
-                <span>MicroLearn</span>
+                <span>MarcaUnach</span>
             </h1>
         </div>
         <nav id="main-nav" class="flex-1 p-4 space-y-2">
@@ -1207,7 +1207,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Zoom effect on image click
     badgeModalImg.addEventListener('click', () => {
-        badgeModalImg.classList.toggle('zoomed');
+        if (badgeModalImg.classList.contains('zoomed')) {
+            // If zoomed, remove zoom and open in new window
+            badgeModalImg.classList.remove('zoomed');
+            window.open(badgeModalImg.src, '_blank');
+        } else {
+            // If not zoomed, add zoom
+            badgeModalImg.classList.add('zoomed');
+        }
     });
 
     closeBadgeModalBtn.addEventListener('click', closeBadgeModal);
