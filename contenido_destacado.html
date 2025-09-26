@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Plataforma Educativa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#4CAF50",
+            "background-light": "#F7F9FC",
+            "background-dark": "#1A202C",
+            "card-light": "#FFFFFF",
+            "card-dark": "#2D3748",
+            "text-light": "#1A202C",
+            "text-dark": "#E2E8F0",
+            "text-secondary-light": "#718096",
+            "text-secondary-dark": "#A0AEC0",
+            "border-light": "#E2E8F0",
+            "border-dark": "#4A5568",
+          },
+          fontFamily: {
+            display: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="flex h-screen">
+<aside class="w-64 bg-card-light dark:bg-card-dark flex flex-col border-r border-border-light dark:border-border-dark">
+<div class="p-4 flex items-center justify-between border-b border-border-light dark:border-border-dark">
+<h1 class="text-xl font-bold">MENU</h1>
+<button class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
+<span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">chevron_left</span>
+</button>
+</div>
+<nav class="flex-1 p-4 space-y-2">
+<a class="flex items-center p-2 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-100 dark:hover:bg-gray-700" href="#">
+<span class="material-icons mr-3">dashboard</span>
+          Panel
+        </a>
+<a class="flex items-center p-2 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-100 dark:hover:bg-gray-700" href="#">
+<span class="material-icons mr-3">school</span>
+          Mis cursos
+        </a>
+<a class="flex items-center p-2 rounded-md bg-primary/10 text-primary border-l-4 border-primary" href="#">
+<span class="material-icons mr-3">catalog</span>
+          Catálogo
+        </a>
+<a class="flex items-center p-2 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-100 dark:hover:bg-gray-700" href="#">
+<span class="material-icons mr-3">bookmark_border</span>
+          Bookmarks
+        </a>
+<a class="flex items-center p-2 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-100 dark:hover:bg-gray-700" href="#">
+<span class="material-icons mr-3">apps</span>
+          Mis aplicaciones
+        </a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col">
+<header class="flex items-center justify-between p-4 bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark">
+<div class="flex items-center space-x-4">
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-text-light dark:hover:text-text-dark" href="#">Aprender</a>
+<div class="relative">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">search</span>
+<input class="bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-md pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Buscar" type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<img alt="University Logo" class="h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVOcOt-FWIqA1njwvHQNd_EZCo8cP0vxbKE6r5Yy2A7oHpwka_4mW3Zc-m3Ei2lsrGpS6OtnsU-ciI3ff9JrPLwNN7uAiS4T6kFQ_LUcMhZtYiQTeKkwiqHXVcwfvoNAzg4_ovlBdb1-Xw_zLMtk6XgdzaMXjo9RDSHbuFcouMDLvdLi0dYZu-5MGVrZCWSoaEL0536Y7sVEQ3Jhb0qZyqHJSr5A_6KizyTvPxhqCmdpgO8UvQLYVSaEFC2_OeWe8CZ1eIPu6dgQ0"/>
+<span class="font-semibold">UNIVERSIDAD OLMECA</span>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+<span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">notifications_none</span>
+</button>
+<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+<span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">apps</span>
+</button>
+<img alt="User avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfpzrM2Olb-h0N1cQw1mP5NrnTa5C9NRWIVgOXufbIfUGQXGGenf_gt5U1-SERlLiRyflHN73IBC4xXSYPmgk2PED6w_MdnpNA93nJ47qEsI-1e1liOGFIIQMvtaD8ohzE6lcRw7_G9YUaHXzErN3S8x4APbPT_4N_bdgPXEbTYcoD2sSk1qy2siF8mPnK3sjxyvj88Qphq6BVaZkJshDsXz_m_tm3uC3EKCvsgv_bixDBbrqdRfKdUrRGKYQdSmlctSxO43Qve8A"/>
+</div>
+</header>
+<div class="flex-1 p-6 overflow-y-auto bg-background-light dark:bg-background-dark">
+
+<section class="mb-8">
+<h2 class="text-2xl font-bold mb-4">Contenido Destacado</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+<div class="relative">
+<img alt="A person in a video call" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/>
+<div class="absolute top-4 left-4 flex items-center space-x-3">
+<span class="bg-white/90 dark:bg-black/70 text-xs font-bold px-3 py-1.5 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Curso Destacado</span>
+</div>
+<div class="absolute bottom-4 left-4 text-white">
+<h3 class="font-extrabold text-xl mb-2">Gestión de Personas en Teletrabajo</h3>
+<p class="text-sm">Descubre las claves para liderar equipos remotos de manera efectiva.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+<div class="relative">
+<img alt="Hands typing on a laptop" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk"/>
+<div class="absolute top-4 left-4 flex items-center space-x-3">
+<span class="bg-white/90 dark:bg-black/70 text-xs font-bold px-3 py-1.5 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Nuevo Ingreso</span>
+</div>
+<div class="absolute bottom-4 left-4 text-white">
+<h3 class="font-extrabold text-xl mb-2">Estrategias Directivas y de Negociación</h3>
+<p class="text-sm">Domina el arte de la negociación y potencia tus habilidades directivas.</p>
+</div>
+</div>
+</div>
+
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+<div class="relative">
+<img alt="Paper with Storytelling written on it" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/>
+<div class="absolute top-4 left-4 flex items-center space-x-3">
+<span class="bg-white/90 dark:bg-black/70 text-xs font-bold px-3 py-1.5 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Popular</span>
+</div>
+<div class="absolute bottom-4 left-4 text-white">
+<h3 class="font-extrabold text-xl mb-2">Storytelling y Marketing de Contenido</h3>
+<p class="text-sm">Aprende a contar historias impactantes para conectar con tu audiencia.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div>
+<div class="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg mb-6 flex justify-between items-center">
+<div class="flex items-center space-x-4">
+<div class="relative">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">search</span>
+<input class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-md pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Buscar en el catálogo..." type="text" value=""/>
+</div>
+<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-md flex items-center space-x-2">
+<span>Tipos</span>
+<span class="material-icons text-sm">expand_more</span>
+</button>
+<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-md flex items-center space-x-2">
+<span>Duración</span>
+<span class="material-icons text-sm">expand_more</span>
+</button>
+<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-md flex items-center space-x-2">
+<span>Fechas</span>
+<span class="material-icons text-sm">expand_more</span>
+</button>
+<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark p-2 rounded-md">
+<span class="material-icons">filter_list</span>
+</button>
+</div>
+<div class="flex items-center space-x-2">
+<span>Ordenado por:</span>
+<select class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+<option>Fecha de adición</option>
+<option>Título</option>
+<option>Popularidad</option>
+</select>
+</div>
+</div>
+<div class="flex items-center space-x-2 text-sm text-text-secondary-light dark:text-text-secondary-dark mb-6">
+<span>Catálogo</span>
+<span class="material-icons text-sm">chevron_right</span>
+<span class="text-text-light dark:text-text-dark">Contenido externo</span>
+<span class="material-icons text-sm">chevron_right</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="A person in a video call" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Gestión de Personas en Teletrabajo</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Gracias a las nuevas tecnologías, la presencia del trabajador en el lugar de trabajo ya no es indispensable para realizar ciertas labores. Estas las...</p>
+<div class="flex justify-between items-center text-text-secondary-light dark:text-text-secondary-dark">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-lg">bookmark_border</span>
+<span class="material-icons text-lg">share</span>
+</div>
+<span class="material-icons text-lg">info_outline</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Hands typing on a laptop" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Estrategias Directivas y de Negociación</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Hoy por hoy las empresas y los directivos están tras la mejora continua, aprendiendo y aplicando nuevas formas para motivar y dirigir a sus trabajadores. Entre las...</p>
+<div class="flex justify-between items-center text-text-secondary-light dark:text-text-secondary-dark">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-lg">bookmark_border</span>
+<span class="material-icons text-lg">share</span>
+</div>
+<span class="material-icons text-lg">info_outline</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Paper with Storytelling written on it" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Storytelling y Marketing de Contenido</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">La narración de cuentos es un arte antiguo, utilizado para comprender mejor el mundo en el que vivimos. Esta civilización de dibujos, las que se...</p>
+<div class="flex justify-between items-center text-text-secondary-light dark:text-text-secondary-dark">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-lg">bookmark_border</span>
+<span class="material-icons text-lg">share</span>
+</div>
+<span class="material-icons text-lg">info_outline</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Abstract cloud computing graphic" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZ_najq744Eaq4dPOBWfs9sHc3DkDv6Q9P48zUKWf0l-ChXJC7DE9opNH29jYKKc3etroLaF9rdeIIFzBiNz08Dbz48_e3DDVDaSZtApt1gtdcG0qWiCcEjnGL1f40jvG4ITbHP0xEXXuC0bX5djJUkpcDcN_wRslVpObpxxX3pXxuNgseYebR3Tq40_zZ27Uf5EqR_ZRSTW7ETwEwZCbeaod90rN0QQN81f9i_ZV_p5a93ghnUeGrS9G2hNi5JuC9D5iQkRTC5w"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Introducción a Cloud Computing</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Se entiende por cloud computing el uso de las capacidades de procesamiento de los servicios de proveedores ubicados en Internet. Se trata de equipos en los que se procesa l...</p>
+<div class="flex justify-between items-center text-text-secondary-light dark:text-text-secondary-dark">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-lg">bookmark_border</span>
+<span class="material-icons text-lg">share</span>
+</div>
+<span class="material-icons text-primary text-lg">play_circle_filled</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Stock market chart" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA57_WSxuynjUV73rSNR_RDZo73y6pE1VcJ2lgPf3fBIHz4PL5VDrX_ApsKVwW0UDzAHQ9JP6sRDN9vZunnk4MA4q2_kT8bCAFmjOYGJOxWWZ26ZBJ7QUTdnuUkqDh3mVCcIUErLN6SzTa-T1zMHkNBd-ET53vbD33zr1WWkzmWGx_q5SMRypApmC3_3dyJfAx2SSH4YFhLARr-0H6Hko3pp4RspmptRogssXu42og-FHJmDsBLQdcIKa_y4LPNzA5zciID2eQRjnU"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Tendencias del Marketing Digital</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Conocer los avances y novedades en materia de Marketing Digital es una necesidad. Las grandes empresas modernas, debido a que estamos frente a un entorno altamente cam...</p>
+<div class="flex justify-between items-center text-text-secondary-light dark:text-text-secondary-dark">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-lg">bookmark_border</span>
+<span class="material-icons text-lg">share</span>
+</div>
+<span class="material-icons text-primary text-lg">play_circle_filled</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Couple smiling" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnB32sPPUhwzavf348GMka6WbAfvcgyXn5q1Uje1NlOe94WWpPFXhY34LsKNhk58S93h6_UywPfGByi4NGUVmxC3X157WJol-1wsL7Q_9kUFxdNYu5Nr-OFmalAw9ZbzbycQMBp0P1ld8yxxLIlbY3ZWsZn4R_MP8VoH5bc8XQ9uv7kFeDRB7M8ROp0xulerUcy2lAeBWsfvAVtsmrie0tADLZdvqQ6hY-0jUo6hmWwsdYPd8VYWQbRgml3LogaKFBeqW-Rg-4J5k"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Estrategias de persuasión</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">La persuasión persigue la consecución de un objetivo, que se expresa en un cambio de la otra parte, por lo que involucra palabras, sentimientos y razonamien...</p>
+<div class="flex justify-between items-center text-text-secondary-light dark:text-text-secondary-dark">
+<div class="flex items-center space-x-2">
+<span class="material-icons text-lg">bookmark_border</span>
+<span class="material-icons text-lg">share</span>
+</div>
+<span class="material-icons text-primary text-lg">play_circle_filled</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Innovation and entrepreneurship graphic" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoRFQfFoAcz9azV6Ksl9ASvee8u3iLkpQSBGDeJHKyDBYjdwdCOQWZ8Y56k-Jd5DkZxzti_cvv9P0LQV3OW1sHmGP8WryulSf2wis9Pb3Nufd0mcJpvUO2yeVs9WUsWOVrgbd9AUioyJcVdZNpTLw8l_TMo7ohqxEMgoqHbfyV0iwFmzwXGIAifFh683_T3mgCEapqWxgj8OC2u9Wg81Mqva8_AVmG8Cjr_Onb5kCQyU_1NUDz7xrimht9RSehT7gK2bZTB2OgMvc"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Innovación y Emprendedurismo en la Industria Gastronómica</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">La gastronomía ha sufrido muchos cambios para dar del modo en que la conocemos hoy. Muchos factores han sido...</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Open book and glasses" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChC4dQ27wwz7Ut5e2B2yWsCtHcX-ozBLlCvPM3827-EM2CovdTmkgeQFlYOxXIRnkA9RpmtF8oe3SUB_A43-_sGPp5ljokLK6YNq1Dsjjb-EMnqXeubq9vnYW_jCDKEy8F2PECIJHxgqmvO5RjVelX_wQtQwoKrPDDirLKWk3l2JDucDPZ9eJqYonQnFwZte5tXAA_XFYzNIwcuTZflw5ogKkKXlb2X9J1wN_UJ6u06AmvGfvMj7u4O2Sg5G-WLjNJLhtiOPOfwtg"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Taller de lecto escritura</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Leer y escribir bien se han convertido en dos grandes habilidades que pueden potenciar nuestra vida personal y profesional. Tener una buena capacidad de compr...</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Abstract permanent learning graphic" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3k8lWA-jgtBjv8iGo2DY6CHbVmv03T52jI0nISgvjqpyNQU2wdmv-YqucN3t76g8-AKXe8kBmqz4cF0Wb6IF9D1xNxU25Woqm2VGOYJ16pEULBw2-kXT5VvGM4In7oyuiRKBxo0NtuVQZ3d_CyfyQiK_xEsJO8H-eBPLUzjWt8cQtiW2BBmr6pU0SxqDGh96I2HHNAtA9IMN8zYj3AT-ZtGWtdwL1o1VpUoZk-1XJ0Z3bk01StH_Bm-S4B-E38CUkC_C5QPHDlbI"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Aprendizaje permanente</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">En el futuro, la calidad de un profesional se medirá por la habilidad de las personas para desenvolverse con éxito en ambientes dinámicos y poder desarrollar nue...</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Disruptive transformation concept art" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOZdUdpwIV_1K4kMf4R0z8BzNgqU2K9NWve1qcY0n9EPPGr7AcMtdMUq0aX6pTu7fClZiupqMUHR-dnSPr7UOcBk4fEB3VJYyZXKKCxgwrUX8wYrAhEVwYMAQ6GM2dEThqeYYbNhksXJFrCtX7HTfm_VEGOEQJNDSdlSBhSmtywa0Nu8vARPleHE9N_I2VkUi2RdYmmkBUzuDrZRNtItfNdimpSwfsYqn4xwur1J8Zy2TQD6wH7pkJJTInfemwZpYJFXkzVnUoiKg"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Transformación Disruptiva para Universidades</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Conéctate a GikyReinventarnos, reimaginarnos, repensarnos el futuro de la educación superior y estamos frente a una...</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Scientist in a lab" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoXWv3whzL4wI3lmdO3vpKT7WpMnGEseDyzBWmdMzZbN_-qPnoIQJRABxDFhR6QutKR_UgcUC3J78giRG4T2nyFXHlpFRulCxTyFrtrD7oTbGnQ_sFgeMSYZJCXW0Gf-gVR74LmWCrjSHcU_JSpP-BfMCB-j1s6NhaysqxqUYLmEYnQdww4BffffvUNk-AnM4oxdeyzJxWXJEzzvtFaNAKYVAcKPQyyaSSIm5oZqNxcpoOhv_SW0Af_DUWUxcc5CxpOf6t_fzbEqE"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Bioquímica Avanzada</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Los seres vivos son el resultado de una serie de transformaciones químicas que se agrupan en torno a los seis elementos (Hidrógeno, Oxígeno, Nitrógeno, Fósforo, Calcio y Azufre)...</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+<div class="relative">
+<img alt="Anatomy of the digestive system" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYrAW8ZZ0AiCgBZy8rXQz4aGEh_6Vm13FElsT0kgt5SZnXyT3_NN-RrAnv4nNdwmVZWKoIxkmvVt487F_FxUmibGJk89Jvb-55nkZtMvuXF-RnLlO0-IJJ2YvPT23N9VtrrO-Lh-ObHHM2T-kB8bEn8nY9bugJDLR4hggh-jlQlxkIy7KT0bk71HSGaKg2WHWhTl4CClHCXxqe8i9r1Kz_qAJs5AaVwhlznbt0rFYRQCw-fGAdi2JyscOmjiZ4Xkw_w8sPxgvLySo"/>
+<div class="absolute top-2 left-2 flex items-center space-x-2">
+<span class="bg-white/80 dark:bg-black/60 text-xs font-semibold px-2 py-1 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
+<span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Curso</span>
+</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold mb-2">Patología del Aparato Digestivo</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">El aparato digestivo cumple un rol fundamental en el funcionamiento del organismo y el diagnóstico precoz de la integridad y funcionalidad de la mucosa digestiva para q...</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
