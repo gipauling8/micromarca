@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Plataforma Educativa de Microcredenciales</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -33,224 +33,1034 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Sidebar and Nav */
         .sidebar { transition: transform 0.3s ease-in-out; }
-        #dark-mode-toggle:checked ~ .dot { transform: translateX(1.5rem); }
-        .notification-bubble { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .course-card { transition: all 0.3s ease; }
-        .course-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-        .btn-interactive { transition: transform 0.2s ease, background-color 0.2s ease; }
-        .btn-interactive:hover { transform: scale(1.05); }
-        .nav-link.active { background-color: rgba(13, 148, 136, 0.1); color: #0D9488; border-left: 4px solid #0D9488; font-weight: 600; }
-        .dark .nav-link.active { background-color: rgba(15, 118, 110, 0.3); color: #99F6E4; border-left-color: #99F6E4; }
-        .nav-link { color: #64748B; }
-        .dark .nav-link { color: #94A3B8; }
-        .nav-link:hover { background-color: rgba(13, 148, 136, 0.05); color: #0F766E; }
-        .dark .nav-link:hover { background-color: rgba(15, 118, 110, 0.2); color: #99F6E4; }
+        .nav-link { transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
+        .nav-link.active {
+            background-color: #0D94881A; /* primary/10 */
+            color: #0F766E; /* primary-dark */
+            border-left: 4px solid #0D9488; /* primary */
+            font-weight: 600;
+        }
+        .dark .nav-link.active {
+            background-color: #0F766E4D; /* primary-dark/30 */
+            color: #99F6E4; /* primary-light */
+            border-left-color: #99F6E4;
+        }
+
+        /* Dark Mode Toggle */
+        #dark-mode-toggle:checked ~ .dot { transform: translateX(100%); }
+        #dark-mode-toggle:checked + .toggle-bg .sun-icon { opacity: 0; }
+        #dark-mode-toggle:checked + .toggle-bg .moon-icon { opacity: 1; }
+        .sun-icon, .moon-icon { transition: opacity 0.3s ease; }
+
+        /* Notification Bell Animation */
+        .notification-bell { animation: ring 2.5s ease-in-out infinite; transform-origin: top center; }
+        @keyframes ring {
+            0%, 100% { transform: rotate(0); }
+            10% { transform: rotate(18deg); }
+            20% { transform: rotate(-15deg); }
+            30% { transform: rotate(12deg); }
+            40% { transform: rotate(-9deg); }
+            50% { transform: rotate(6deg); }
+            60% { transform: rotate(0); }
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar-fill { width: 0; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        
+        /* Modal Styles */
+        .modal-overlay { transition: opacity 0.3s ease-in-out; }
+        .modal-content { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        
+        /* Course Card Hover Effect */
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(13, 148, 136, 0.3);
+        }
+        
+        /* Badge Modal Zoom */
+        #badge-modal-img {
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        #badge-modal-img.zoomed {
+            width: 256px;
+            height: 256px;
+            transform: scale(1.2);
+        }
+        
+        /* Enhanced Course Card Effects */
+        .course-card-enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .course-card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+        
+        .course-card-enhanced:hover::before {
+            left: 100%;
+        }
+        
+        .course-card-enhanced:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.4), 0 0 30px rgba(13, 148, 136, 0.2);
+        }
+        
+        .course-card-enhanced .card-image {
+            transition: all 0.4s ease;
+        }
+        
+        .course-card-enhanced:hover .card-image {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.05);
+        }
+        
+        .course-card-enhanced .progress-glow {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-card-enhanced .progress-glow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progress-shine 2s infinite;
+        }
+        
+        @keyframes progress-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .course-card-enhanced .continue-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-card-enhanced .continue-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .course-card-enhanced .continue-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .course-card-enhanced .status-badge {
+            animation: badge-pulse 2s infinite;
+        }
+        
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(13, 148, 136, 0); }
+        }
+        
+        /* Floating animation for progress indicators */
+        .progress-floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
 
 <div class="flex h-screen overflow-hidden">
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-card-light dark:bg-card-dark flex-col border-r border-border-light dark:border-border-dark sidebar absolute md:relative inset-y-0 left-0 z-30 md:z-auto md:translate-x-0 -translate-x-full flex">
-        <div class="p-4 flex items-center justify-center border-b border-border-light dark:border-border-dark">
+    <aside id="sidebar" class="w-64 bg-card-light dark:bg-card-dark flex-col border-r border-border-light dark:border-border-dark sidebar absolute md:relative inset-y-0 left-0 z-40 md:z-auto md:translate-x-0 -translate-x-full flex">
+        <div class="p-4 flex items-center justify-center border-b border-border-light dark:border-border-dark h-16">
             <h1 class="text-2xl font-bold text-primary-dark dark:text-primary-light flex items-center gap-2">
                 <span class="material-symbols-outlined text-3xl">school</span>
-                <span>MicroMarcaUnach</span>
+                <span>MicroLearn</span>
             </h1>
         </div>
         <nav id="main-nav" class="flex-1 p-4 space-y-2">
-            <a id="nav-dashboard" href="#" class="nav-link flex items-center p-3 rounded-lg transition-colors"><span class="material-icons mr-3">dashboard</span> Panel Principal</a>
-            <a id="nav-discover" href="#" class="nav-link flex items-center p-3 rounded-lg transition-colors"><span class="material-icons mr-3">explore</span> Descubrir Cursos</a>
-            <a href="#" class="nav-link flex items-center p-3 rounded-lg transition-colors"><span class="material-icons mr-3">trending_up</span> Mi Progreso</a>
-            <a href="#" class="nav-link flex items-center p-3 rounded-lg transition-colors"><span class="material-icons mr-3">verified</span> Certificaciones</a>
-            <a href="#" class="nav-link flex items-center p-3 rounded-lg transition-colors"><span class="material-icons mr-3">bookmark_border</span> Guardados</a>
+            <a href="#" id="nav-dashboard" class="nav-link flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary-light/30 hover:text-primary-dark dark:hover:bg-primary-dark/30 dark:hover:text-primary-light">
+                <span class="material-icons mr-3">dashboard</span> Panel Principal
+            </a>
+            <a href="#" id="nav-progress" class="nav-link flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary-light/30 hover:text-primary-dark dark:hover:bg-primary-dark/30 dark:hover:text-primary-light">
+                <span class="material-icons mr-3">trending_up</span> Mi Progreso
+            </a>
+            <a href="#" id="nav-en-curso" class="nav-link flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary-light/30 hover:text-primary-dark dark:hover:bg-primary-dark/30 dark:hover:text-primary-light">
+                <span class="material-icons mr-3">play_circle</span> En curso
+            </a>
+            <a href="#" id="nav-discover" class="nav-link flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary-light/30 hover:text-primary-dark dark:hover:bg-primary-dark/30 dark:hover:text-primary-light">
+                <span class="material-icons mr-3">explore</span> Descubrir Microcredenciales
+            </a>
+            <a href="#" class="nav-link flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary-light/30 hover:text-primary-dark dark:hover:bg-primary-dark/30 dark:hover:text-primary-light">
+                <span class="material-icons mr-3">bookmark_border</span> Guardados
+            </a>
         </nav>
         <div class="p-4 border-t border-border-light dark:border-border-dark">
-            <button id="logout-button" class="w-full flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 dark:hover:text-red-400 transition-colors btn-interactive"><span class="material-icons mr-3">logout</span> Cerrar Sesión</button>
+            <button class="w-full flex items-center p-3 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 dark:hover:text-red-400 transition-colors btn-interactive">
+                <span class="material-icons mr-3">logout</span> Cerrar Sesión
+            </button>
         </div>
     </aside>
 
     <!-- Main content -->
-    <main class="flex-1 flex flex-col relative">
-        <header class="flex items-center justify-between p-4 bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark z-10">
-<div class="flex items-center space-x-4">
-<button class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden">
-<span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">menu</span>
-</button>
-<div class="relative">
-<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">search</span>
-<input class="bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-md pl-10 pr-4 py-2 w-48 md:w-80 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Buscar microcursos..." type="text"/>
-</div>
-</div>
-<div class="flex items-center space-x-4">
-<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative">
-<span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">notifications</span>
-<span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500"></span>
-</button>
-<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
-<span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">apps</span>
-</button>
-<div class="flex items-center space-x-2">
-<img alt="User avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/a/ACg8ocJ9q4K-n2w4gGfA1sX9Y6X-MQX4f4q2fG4d4f4-8c8=s96-c"/>
-<div class="hidden md:block">
-<p class="font-semibold text-sm">Ana Morales</p>
-<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Estudiante</p>
-</div>
-</div>
-</div>
-</header>
+    <main class="flex-1 flex flex-col">
+        <header class="flex items-center justify-between p-4 bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark z-30 h-16">
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden">
+                    <span class="material-icons text-text-secondary-light dark:text-text-secondary-dark">menu</span>
+                </button>
+                <div class="relative hidden md:block">
+                    <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">search</span>
+                    <input class="bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-md pl-10 pr-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Buscar microcursos..." type="text"/>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <label for="dark-mode-toggle" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                        <input type="checkbox" id="dark-mode-toggle" class="sr-only">
+                        <div class="toggle-bg bg-gray-200 dark:bg-gray-700 w-14 h-8 rounded-full flex items-center justify-between px-2">
+                           <span class="material-symbols-outlined text-yellow-500 sun-icon">light_mode</span>
+                           <span class="material-symbols-outlined text-slate-300 moon-icon opacity-0">dark_mode</span>
+                        </div>
+                        <div class="dot absolute left-1 top-1 bg-white dark:bg-slate-900 w-6 h-6 rounded-full transition-transform"></div>
+                    </div>
+                </label>
+                <button id="notification-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative">
+                    <span class="material-icons text-text-secondary-light dark:text-text-secondary-dark notification-bell">notifications</span>
+                    <span class="absolute top-1 right-1 block h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-card-light dark:border-card-dark"></span>
+                </button>
+                <div id="notification-dropdown" class="absolute right-0 top-12 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg w-80 p-4 hidden z-50">
+                    <h3 class="font-bold mb-3">Notificaciones</h3>
+                    <div class="space-y-3 max-h-64 overflow-y-auto">
+                        <div class="flex items-start gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-lg cursor-pointer">
+                            <span class="material-symbols-outlined text-primary">info</span>
+                            <div>
+                                <p class="text-sm font-medium">Nuevo curso disponible: "Innovación en Gastronomía"</p>
+                                <p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Hace 2 horas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-lg cursor-pointer">
+                            <span class="material-symbols-outlined text-accent">emoji_events</span>
+                            <div>
+                                <p class="text-sm font-medium">¡Felicidades! Has obtenido una nueva insignia</p>
+                                <p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Hace 5 horas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-lg cursor-pointer">
+                            <span class="material-symbols-outlined text-green-500">schedule</span>
+                            <div>
+                                <p class="text-sm font-medium">Recordatorio: Examen de Cloud Computing mañana</p>
+                                <p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Hace 1 día</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-lg cursor-pointer">
+                            <span class="material-symbols-outlined text-blue-500">forum</span>
+                            <div>
+                                <p class="text-sm font-medium">Nuevo mensaje en el foro de Marketing</p>
+                                <p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Hace 2 días</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-lg cursor-pointer">
+                            <span class="material-symbols-outlined text-purple-500">verified_user</span>
+                            <div>
+                                <p class="text-sm font-medium">Tu certificación ha sido emitida</p>
+                                <p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Hace 3 días</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-3 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Ver todas las notificaciones</button>
+                </div>
+                <div id="user-menu-btn" class="flex items-center space-x-2 cursor-pointer relative">
+                    <img alt="User avatar" class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Usuario&background=0D9488&color=fff&size=40"/>
+                    <span class="material-icons text-text-secondary-light dark:text-text-secondary-dark hidden md:block">expand_more</span>
+                    <div id="user-dropdown" class="absolute right-0 top-12 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg w-48 py-2 hidden z-50">
+                        <a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                            <span class="material-symbols-outlined mr-3">person</span> Mi Perfil
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                            <span class="material-symbols-outlined mr-3">settings</span> Configuración
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                            <span class="material-symbols-outlined mr-3">help</span> Ayuda
+                        </a>
+                        <hr class="my-1 border-border-light dark:border-border-dark">
+                        <a href="#" class="flex items-center px-4 py-2 text-sm hover:bg-red-50 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400">
+                            <span class="material-symbols-outlined mr-3">logout</span> Cerrar Sesión
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-        <div id="notifications-panel" class="absolute top-16 right-4 w-80 bg-card-light dark:bg-card-dark rounded-lg shadow-xl border border-border-light dark:border-border-dark p-4 z-50 hidden"><!-- ... notifications ... --></div>
-
-        <!-- Page Content -->
         <div class="flex-1 p-6 overflow-y-auto bg-background-light dark:bg-background-dark">
             
-            <!-- Dashboard View -->
-            <div id="dashboard-view" class="hidden">
-                <h2 class="text-3xl font-bold mb-6">Panel Principal</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">military_tech</span>Mi Progreso</h2><div class="space-y-4"><div><div class="flex justify-between items-center mb-1"><p class="font-medium">Insignias Obtenidas</p><p class="font-bold text-primary">5 / 12</p></div><div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-primary h-2.5 rounded-full" style="width: 45%"></div></div></div><div><div class="flex justify-between items-center mb-1"><p class="font-medium">Nanotítulos Completados</p><p class="font-bold text-accent">2 / 4</p></div><div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-accent h-2.5 rounded-full" style="width: 50%"></div></div></div></div></div>
-                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-accent">verified_user</span>Mis Certificaciones</h2><div id="certifications-container" class="flex items-center justify-around h-full"><div class="text-center"><span class="material-symbols-outlined text-5xl text-blue-500">school</span><p class="font-semibold mt-1">Liderazgo Ágil</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Emitido: 15/03/24</p></div><div class="text-center"><span class="material-symbols-outlined text-5xl text-green-500">bar_chart</span><p class="font-semibold mt-1">Análisis de Datos</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Emitido: 02/02/24</p></div><button id="view-all-certs" class="self-center text-primary dark:text-primary-light hover:underline btn-interactive">Ver todas</button></div></div>
+            <!-- Panel Principal View -->
+            <div id="panel-principal-view" class="hidden">
+                <h1 class="text-3xl font-bold mb-6">Panel Principal</h1>
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-yellow-500">workspace_premium</span>MIS INSIGNIAS</h2>
+                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-6">¡Cada insignia representa un logro conquistado! Sigue aprendiendo y desbloquea más para destacar tus habilidades.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="flex flex-col items-center p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer badge-item" data-src="images/micro1.png" data-alt="Insignia 1">
+                            <img src="images/micro1.png" alt="Insignia 1" class="w-32 h-32 mb-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <p class="text-center font-semibold text-primary">Logro Inicial</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer badge-item" data-src="images/micro2.png" data-alt="Insignia 2">
+                            <img src="images/micro2.png" alt="Insignia 2" class="w-32 h-32 mb-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <p class="text-center font-semibold text-primary">Avance Notable</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer badge-item" data-src="images/micro3.png" data-alt="Insignia 3">
+                            <img src="images/micro3.png" alt="Insignia 3" class="w-32 h-32 mb-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <p class="text-center font-semibold text-primary">Maestría</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer badge-item" data-src="images/micro4.png" data-alt="Insignia 4">
+                            <img src="images/micro4.png" alt="Insignia 4" class="w-32 h-32 mb-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                            <p class="text-center font-semibold text-primary">Excelencia</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">military_tech</span>Mi Progreso</h2>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-1"><p class="font-medium">Insignias Obtenidas</p><p class="font-bold text-primary">5 / 12</p></div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div data-value="45" class="progress-bar-fill bg-primary h-2.5 rounded-full"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-1"><p class="font-medium">Nanotítulos Completados</p><p class="font-bold text-accent">2 / 4</p></div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div data-value="50" class="progress-bar-fill bg-accent h-2.5 rounded-full"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-accent">verified_user</span>Mis Certificaciones</h2>
+                        <div class="flex items-center justify-around h-full">
+                            <div class="text-center"><span class="material-symbols-outlined text-5xl text-blue-500">school</span><p class="font-semibold mt-1">Liderazgo Ágil</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Emitido: 15/03/24</p></div>
+                            <div class="text-center"><span class="material-symbols-outlined text-5xl text-green-500">bar_chart</span><p class="font-semibold mt-1">Análisis de Datos</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Emitido: 02/02/24</p></div>
+                            <button id="view-all-certs-btn" class="self-center text-primary dark:text-primary-light hover:underline btn-interactive">Ver todas</button>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-green-500">play_circle</span>Mis Cursos Activos</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div><p class="font-medium">Gestión de Personas en Teletrabajo</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">60% completado</p></div>
+                                <button class="bg-primary text-white px-3 py-1 rounded-lg text-sm hover:bg-primary-dark transition-colors">Continuar</button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><p class="font-medium">Introducción a Cloud Computing</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">30% completado</p></div>
+                                <button class="bg-primary text-white px-3 py-1 rounded-lg text-sm hover:bg-primary-dark transition-colors">Continuar</button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><p class="font-medium">Storytelling y Marketing</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">80% completado</p></div>
+                                <button class="bg-primary text-white px-3 py-1 rounded-lg text-sm hover:bg-primary-dark transition-colors">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-orange-500">event</span>Próximas Actividades</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary">schedule</span>
+                                <div><p class="font-medium">Entrega de Proyecto</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Gestión de Personas - 28 Sep 2025</p></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-accent">quiz</span>
+                                <div><p class="font-medium">Examen Final</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Cloud Computing - 30 Sep 2025</p></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-green-500">group</span>
+                                <div><p class="font-medium">Sesión de Tutoría</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Marketing Digital - 1 Oct 2025</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-purple-500">emoji_events</span>Logros Recientes</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-yellow-500 text-3xl">workspace_premium</span>
+                                <div><p class="font-medium">Insignia: Liderazgo Digital</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Obtenida el 20 Sep 2025</p></div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-blue-500 text-3xl">school</span>
+                                <div><p class="font-medium">Nanotítulo: Análisis de Datos</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Completado el 15 Sep 2025</p></div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-green-500 text-3xl">local_fire_department</span>
+                                <div><p class="font-medium">Racha de 7 días</p><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">¡Sigue aprendiendo!</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-pink-500">trending_up</span>Estadísticas de Aprendizaje</h2>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Tiempo total estudiado</span>
+                                <span class="font-bold">24h 30m</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Cursos completados este mes</span>
+                                <span class="font-bold">3</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Promedio de calificaciones</span>
+                                <span class="font-bold">92%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Puntuación global</span>
+                                <span class="font-bold text-primary">1,250 pts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-indigo-500">recommend</span>Recomendaciones</h2>
+                        <div class="space-y-4">
+                            <div class="p-3 bg-primary/10 dark:bg-primary/20 rounded-lg">
+                                <p class="font-medium">Basado en tu progreso</p>
+                                <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Te recomendamos "Estrategias de Negociación" para complementar tus habilidades.</p>
+                            </div>
+                            <div class="p-3 bg-accent/10 dark:bg-accent/20 rounded-lg">
+                                <p class="font-medium">Popular en tu área</p>
+                                <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Muchos estudiantes de tecnología están tomando "Bioquímica Avanzada".</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-teal-500">forum</span>Comunidad</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Ana+G&background=0D9488&color=fff&size=32" class="w-8 h-8 rounded-full">
+                                <div><p class="font-medium text-sm">Ana García</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">¿Alguien ha terminado el módulo de Cloud?</p></div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Carlos+M&background=0D9488&color=fff&size=32" class="w-8 h-8 rounded-full">
+                                <div><p class="font-medium text-sm">Carlos Martínez</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">¡Felicidades por tu nueva insignia!</p></div>
+                            </div>
+                            <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Unirse a la Conversación</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <section class="mb-8">
-<h2 class="text-2xl font-bold mb-4">Contenido Destacado</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
-<div class="relative">
-<img alt="A person in a video call" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/>
-<div class="absolute top-4 left-4 flex items-center space-x-3">
-<span class="bg-white/90 dark:bg-black/70 text-xs font-bold px-3 py-1.5 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
-<span class="bg-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Curso Destacado</span>
-</div>
-<div class="absolute bottom-4 left-4 text-white">
-<h3 class="font-extrabold text-xl mb-2">Gestión de Personas en Teletrabajo</h3>
-<p class="text-sm">Descubre las claves para liderar equipos remotos de manera efectiva.</p>
-</div>
-</div>
-</div>
-
-<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
-<div class="relative">
-<img alt="Hands typing on a laptop" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk"/>
-<div class="absolute top-4 left-4 flex items-center space-x-3">
-<span class="bg-white/90 dark:bg-black/70 text-xs font-bold px-3 py-1.5 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
-<span class="bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Nuevo Ingreso</span>
-</div>
-<div class="absolute bottom-4 left-4 text-white">
-<h3 class="font-extrabold text-xl mb-2">Estrategias Directivas y de Negociación</h3>
-<p class="text-sm">Domina el arte de la negociación y potencia tus habilidades directivas.</p>
-</div>
-</div>
-</div>
-
-<div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
-<div class="relative">
-<img alt="Paper with Storytelling written on it" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/>
-<div class="absolute top-4 left-4 flex items-center space-x-3">
-<span class="bg-white/90 dark:bg-black/70 text-xs font-bold px-3 py-1.5 rounded-full flex items-center"><span class="material-icons text-sm mr-1">person</span>Giky</span>
-<span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Popular</span>
-</div>
-<div class="absolute bottom-4 left-4 text-white">
-<h3 class="font-extrabold text-xl mb-2">Storytelling y Marketing de Contenido</h3>
-<p class="text-sm">Aprende a contar historias impactantes para conectar con tu audiencia.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<div class="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg mb-6 flex justify-between items-center">
-<div class="flex items-center space-x-4">
-<div class="relative">
-<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark">search</span>
-<input class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-md pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Buscar en el catálogo..." type="text" value=""/>
-</div>
-<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-md flex items-center space-x-2">
-<span>Tipos</span>
-<span class="material-icons text-sm">expand_more</span>
-</button>
-<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-md flex items-center space-x-2">
-<span>Duración</span>
-<span class="material-icons text-sm">expand_more</span>
-</button>
-<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-md flex items-center space-x-2">
-<span>Fechas</span>
-<span class="material-icons text-sm">expand_more</span>
-</button>
-<button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark p-2 rounded-md">
-<span class="material-icons">filter_list</span>
-</button>
-</div>
-<div class="flex items-center space-x-2">
-<span>Ordenado por:</span>
-<select class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
-<option>Fecha de adición</option>
-<option>Título</option>
-<option>Popularidad</option>
-</select>
-</div>
-</div>
-            <!-- Discover View -->
-            <div id="discover-view">
-                <h2 class="text-3xl font-bold mb-6">Descubrir Microcursos</h2>
-                <div id="category-filters" class="mb-6 flex flex-wrap items-center gap-4">
-                    <button class="bg-primary text-white px-4 py-2 rounded-full font-semibold btn-interactive">Todos</button>
-                    <button data-category="Tecnología" class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Tecnología</button>
-                    <button data-category="Negocios" class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Negocios</button>
-                    <button data-category="Habilidades Blandas" class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Habilidades Blandas</button>
-                    <button data-category="Diseño" class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Diseño</button>
+            <!-- Progreso View -->
+            <div id="progreso-view" class="hidden">
+                <h1 class="text-3xl font-bold mb-6">Mi Progreso</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">school</span>Progreso General</h2>
+                        <div class="space-y-4">
+                            <div class="text-center">
+                                <div class="relative w-32 h-32 mx-auto mb-4">
+                                    <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="100, 100" class="text-gray-200 dark:text-gray-700"></path>
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="75, 100" class="text-primary"></path>
+                                    </svg>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="text-2xl font-bold text-primary">75%</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Completado</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div>
+                                    <p class="text-2xl font-bold text-accent">12</p>
+                                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Cursos Completados</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-green-500">8</p>
+                                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">En Progreso</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-accent">military_tech</span>Insignias Obtenidas</h2>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <span class="material-symbols-outlined text-yellow-500 text-4xl">workspace_premium</span>
+                                <p class="text-sm font-medium mt-1">Liderazgo</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="material-symbols-outlined text-blue-500 text-4xl">code</span>
+                                <p class="text-sm font-medium mt-1">Programación</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="material-symbols-outlined text-green-500 text-4xl">bar_chart</span>
+                                <p class="text-sm font-medium mt-1">Análisis</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="material-symbols-outlined text-purple-500 text-4xl">design_services</span>
+                                <p class="text-sm font-medium mt-1">Diseño</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="material-symbols-outlined text-red-500 text-4xl">language</span>
+                                <p class="text-sm font-medium mt-1">Idiomas</p>
+                            </div>
+                            <div class="text-center opacity-50">
+                                <span class="material-symbols-outlined text-gray-400 text-4xl">psychology</span>
+                                <p class="text-sm font-medium mt-1">Próxima</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm">
+                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-green-500">schedule</span>Tiempo de Estudio</h2>
+                        <div class="space-y-4">
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-primary">127h</p>
+                                <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Tiempo total</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span>Esta semana</span>
+                                    <span class="font-medium">18h 30m</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span>Esta mes</span>
+                                    <span class="font-medium">42h 15m</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="courses-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card" data-category="Habilidades Blandas"><div class="relative"><img alt="Gestión de Personas en Teletrabajo" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/><span class="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full">En Progreso</span></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Gestión de Personas en Teletrabajo</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Aprende a liderar equipos remotos de forma efectiva y humana.</p><div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mb-4"><div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div></div><div class="flex justify-between items-center text-sm"><span class="font-semibold text-primary">60% completado</span><button class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors btn-interactive">Continuar</button></div></div></div>
-                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card" data-category="Negocios"><div class="relative"><img alt="Estrategias Directivas y de Negociación" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Estrategias de Negociación</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Domina el arte de la negociación para cerrar acuerdos exitosos.</p><div class="flex items-center text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 gap-4"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 4h</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">label</span> Negocios</span></div><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">Gratis</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
-                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card" data-category="Marketing"><div class="relative"><img alt="Storytelling y Marketing de Contenido" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/><span class="absolute top-2 right-2 bg-accent/80 text-white text-xs font-semibold px-2 py-1 rounded-full">Recomendado</span></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Storytelling y Marketing</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Crea narrativas que conecten y vendan tus productos o ideas.</p><div class="flex items-center text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 gap-4"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 6h</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">label</span> Marketing</span></div><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$49.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
-                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card" data-category="Tecnología"><div class="relative"><img alt="Introducción a Cloud Computing" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZ_najq744Eaq4dPOBWfs9sHc3DkDv6Q9P48zUKWf0l-ChXJC7DE9opNH29jYKKc3etroLaF9rdeIIFzBiNz08Dbz48_e3DDVDaSZtApt1gtdcG0qWiCcEjnGL1f40jvG4ITbHP0xEXXuC0bX5djJUkpcDcN_wRslVpObpxxX3pXxuNgseYebR3Tq40_zZ27Uf5EqR_ZRSTW7ETwEwZCbeaod90rN0QQN81f9i_ZV_p5a93ghnUeGrS9G2hNi5JuC9D5iQkRTC5w"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Introducción a Cloud Computing</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Entiende los fundamentos de la nube y sus principales servicios.</p><div class="flex items-center text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 gap-4"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 8h</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">label</span> Tecnología</span></div><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$99.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm">
+                    <h2 class="text-xl font-bold mb-4">Progreso por Curso</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border border-border-light dark:border-border-dark rounded-lg">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-primary text-2xl">play_circle</span>
+                                <div>
+                                    <p class="font-medium">Gestión de Personas en Teletrabajo</p>
+                                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Última actividad: hace 2 días</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-primary">60%</p>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-border-light dark:border-border-dark rounded-lg">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-accent text-2xl">play_circle</span>
+                                <div>
+                                    <p class="font-medium">Introducción a Cloud Computing</p>
+                                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Última actividad: hace 1 día</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-accent">30%</p>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-border-light dark:border-border-dark rounded-lg">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-green-500 text-2xl">check_circle</span>
+                                <div>
+                                    <p class="font-medium">Storytelling y Marketing</p>
+                                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Completado: 15 Sep 2025</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-green-500">100%</p>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- En Curso View -->
+            <div id="en-curso-view" class="hidden">
+                <h1 class="text-3xl font-bold mb-6">En Curso</h1>
+                <p class="text-lg text-text-secondary-light dark:text-text-secondary-dark mb-8">Continúa aprendiendo con tus cursos activos. ¡Mantén el ritmo y alcanza tus metas!</p>
+                
+                <!-- Cursos Activos Section -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">play_circle</span>Cursos Activos</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-card-light dark:bg-card-dark rounded-xl overflow-hidden shadow-xl course-card course-card-enhanced transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-border-light dark:border-border-dark">
+                            <div class="relative group">
+                                <img alt="Gestión de Personas en Teletrabajo" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110 card-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                <div class="absolute top-4 left-4 flex items-center gap-2">
+                                    <span class="bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-1 status-badge">
+                                        <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                        En Progreso
+                                    </span>
+                                </div>
+                                <div class="absolute top-4 right-4">
+                                    <div class="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                                        <span class="material-symbols-outlined text-white text-xl">schedule</span>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 left-4 right-4">
+                                    <div class="bg-black/50 backdrop-blur-sm rounded-lg p-3 progress-floating">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-white font-semibold text-sm">Progreso del curso</span>
+                                            <span class="text-white font-bold text-lg">60%</span>
+                                        </div>
+                                        <div class="w-full bg-white/30 rounded-full h-2 progress-glow">
+                                            <div class="bg-gradient-to-r from-primary to-primary-light h-2 rounded-full transition-all duration-1000" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-xl mb-2 text-text-light dark:text-text-dark leading-tight">Gestión de Personas en Teletrabajo</h3>
+                                        <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm leading-relaxed">Aprende a liderar equipos remotos de forma efectiva y humana.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-primary text-lg">access_time</span>
+                                        <span class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">Última actividad: hace 2 días</span>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-primary to-primary-dark text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-dark hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 continue-btn">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Continuar Aprendiendo
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-card-light dark:bg-card-dark rounded-xl overflow-hidden shadow-xl course-card course-card-enhanced transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-border-light dark:border-border-dark">
+                            <div class="relative group">
+                                <img alt="Introducción a Cloud Computing" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110 card-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZ_najq744Eaq4dPOBWfs9sHc3DkDv6Q9P48zUKWf0l-ChXJC7DE9opNH29jYKKc3etroLaF9rdeIIFzBiNz08Dbz48_e3DDVDaSZtApt1gtdcG0qWiCcEjnGL1f40jvG4ITbHP0xEXXuC0bX5djJUkpcDcN_wRslVpObpxxX3pXxuNgseYebR3Tq40_zZ27Uf5EqR_ZRSTW7ETwEwZCbeaod90rN0QQN81f9i_ZV_p5a93ghnUeGrS9G2hNi5JuC9D5iQkRTC5w"/>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                <div class="absolute top-4 left-4 flex items-center gap-2">
+                                    <span class="bg-gradient-to-r from-accent to-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-1 status-badge">
+                                        <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                        En Progreso
+                                    </span>
+                                </div>
+                                <div class="absolute top-4 right-4">
+                                    <div class="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                                        <span class="material-symbols-outlined text-white text-xl">cloud</span>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 left-4 right-4">
+                                    <div class="bg-black/50 backdrop-blur-sm rounded-lg p-3 progress-floating">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-white font-semibold text-sm">Progreso del curso</span>
+                                            <span class="text-white font-bold text-lg">30%</span>
+                                        </div>
+                                        <div class="w-full bg-white/30 rounded-full h-2 progress-glow">
+                                            <div class="bg-gradient-to-r from-accent to-orange-400 h-2 rounded-full transition-all duration-1000" style="width: 30%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-xl mb-2 text-text-light dark:text-text-dark leading-tight">Introducción a Cloud Computing</h3>
+                                        <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm leading-relaxed">Entiende los fundamentos de la nube y sus principales servicios.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-accent text-lg">access_time</span>
+                                        <span class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">Última actividad: hace 1 día</span>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-accent to-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-orange-500 hover:to-accent transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 continue-btn">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Continuar Aprendiendo
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-card-light dark:bg-card-dark rounded-xl overflow-hidden shadow-xl course-card course-card-enhanced transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-border-light dark:border-border-dark">
+                            <div class="relative group">
+                                <img alt="Storytelling y Marketing de Contenido" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110 card-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                <div class="absolute top-4 left-4 flex items-center gap-2">
+                                    <span class="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-1 status-badge">
+                                        <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                        En Progreso
+                                    </span>
+                                </div>
+                                <div class="absolute top-4 right-4">
+                                    <div class="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                                        <span class="material-symbols-outlined text-white text-xl">edit</span>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 left-4 right-4">
+                                    <div class="bg-black/50 backdrop-blur-sm rounded-lg p-3 progress-floating">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-white font-semibold text-sm">Progreso del curso</span>
+                                            <span class="text-white font-bold text-lg">80%</span>
+                                        </div>
+                                        <div class="w-full bg-white/30 rounded-full h-2 progress-glow">
+                                            <div class="bg-gradient-to-r from-green-500 to-emerald-400 h-2 rounded-full transition-all duration-1000" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-xl mb-2 text-text-light dark:text-text-dark leading-tight">Storytelling y Marketing</h3>
+                                        <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm leading-relaxed">Crea narrativas que conecten y vendan tus productos o ideas.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-green-500 text-lg">access_time</span>
+                                        <span class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">Última actividad: hace 3 horas</span>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-500 hover:to-green-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 continue-btn">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    Continuar Aprendiendo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Motivational Activities Section -->
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm mb-8">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-accent">celebration</span>¡Sigue Avanzando!</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                            <span class="material-symbols-outlined text-orange-500 text-2xl">local_fire_department</span>
+                            <div>
+                                <p class="font-bold text-orange-700 dark:text-orange-300">¡Mantén tu racha de estudio!</p>
+                                <p class="text-sm text-orange-600 dark:text-orange-400">Has estudiado 5 días seguidos. ¡No rompas la cadena! Cada día cuenta para tu crecimiento.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <span class="material-symbols-outlined text-blue-500 text-2xl">workspace_premium</span>
+                            <div>
+                                <p class="font-bold text-blue-700 dark:text-blue-300">Próximo logro: ¡Maestro Digital!</p>
+                                <p class="text-sm text-blue-600 dark:text-blue-400">Completa 2 cursos más y desbloquea la insignia "Maestro Digital". ¡Estás a solo 2 cursos de distancia!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <span class="material-symbols-outlined text-green-500 text-2xl">trending_up</span>
+                            <div>
+                                <p class="font-bold text-green-700 dark:text-green-300">¡Tu progreso es impresionante!</p>
+                                <p class="text-sm text-green-600 dark:text-green-400">Has completado el 75% de tus cursos este mes. ¡Sigue así y conviértete en un líder del aprendizaje!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <span class="material-symbols-outlined text-purple-500 text-2xl">lightbulb</span>
+                            <div>
+                                <p class="font-bold text-purple-700 dark:text-purple-300">¡Descubre tu próximo desafío!</p>
+                                <p class="text-sm text-purple-600 dark:text-purple-400">Basado en tu progreso, te recomendamos "Inteligencia Artificial para Todos". ¡Abre nuevas puertas en tu carrera!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                            <span class="material-symbols-outlined text-yellow-500 text-2xl">stars</span>
+                            <div>
+                                <p class="font-bold text-yellow-700 dark:text-yellow-300">¡Construye tu legado de conocimiento!</p>
+                                <p class="text-sm text-yellow-600 dark:text-yellow-400">Cada curso completado es un paso hacia la excelencia. ¡Tienes el poder de transformar tu futuro!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-lg shadow-sm">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-green-500">lightbulb</span>Recomendaciones para Continuar</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                            <h3 class="font-semibold mb-2">Completa tu módulo actual</h3>
+                            <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Estás a solo 2 lecciones de terminar "Gestión de Personas". ¡Sigue adelante!</p>
+                        </div>
+                        <div class="p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                            <h3 class="font-semibold mb-2">Estudia diariamente</h3>
+                            <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Dedica al menos 30 minutos al día para mantener tu progreso constante.</p>
+                        </div>
+                        <div class="p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                            <h3 class="font-semibold mb-2">Únete a la comunidad</h3>
+                            <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Comparte tus dudas y experiencias con otros estudiantes en el foro.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course View -->
+            <div id="course-view" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <button id="back-to-discover-btn" class="flex items-center gap-2 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Volver a Descubrir
+                    </button>
+                    <h1 id="course-view-title" class="text-3xl font-bold"></h1>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="lg:col-span-2">
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg mb-6">
+                            <img id="course-view-img" src="" alt="" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-4">
+                                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">En Progreso</span>
+                                        <span class="text-text-secondary-light dark:text-text-secondary-dark">Duración: <span id="course-view-duration"></span></span>
+                                    </div>
+                                    <span class="text-2xl font-bold text-primary">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p id="course-view-description" class="text-text-secondary-light dark:text-text-secondary-dark"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg p-6 shadow-sm">
+                            <h2 class="text-2xl font-bold mb-6">Módulos del Curso</h2>
+                            <div id="course-view-modules" class="space-y-4">
+                                <!-- Modules will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg p-6 shadow-sm">
+                            <h3 class="text-lg font-bold mb-4">Tu Progreso</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Lecciones completadas</span>
+                                    <span class="font-semibold">0 / 15</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Tiempo estudiado</span>
+                                    <span class="font-semibold">0h 0m</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Última actividad</span>
+                                    <span class="font-semibold">Nunca</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg p-6 shadow-sm">
+                            <h3 class="text-lg font-bold mb-4">Certificación</h3>
+                            <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4">Al completar este curso, recibirás una certificación reconocida que podrás compartir en tu perfil profesional.</p>
+                            <div class="flex items-center gap-2 text-primary">
+                                <span class="material-symbols-outlined">verified</span>
+                                <span class="font-semibold">Certificado Digital</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg p-6 shadow-sm">
+                            <h3 class="text-lg font-bold mb-4">Recursos Adicionales</h3>
+                            <div class="space-y-3">
+                                <a href="#" class="flex items-center gap-3 p-3 bg-primary/10 dark:bg-primary/20 rounded-lg hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+                                    <span class="material-symbols-outlined text-primary">download</span>
+                                    <div>
+                                        <p class="font-semibold">Material de Apoyo</p>
+                                        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">PDF con recursos adicionales</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 p-3 bg-primary/10 dark:bg-primary/20 rounded-lg hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+                                    <span class="material-symbols-outlined text-primary">forum</span>
+                                    <div>
+                                        <p class="font-semibold">Comunidad</p>
+                                        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Únete a la discusión</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Descubrir Cursos View -->
+            <div id="descubrir-cursos-view">
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Contenido Destacado</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg course-card cursor-pointer" data-course="1"><div class="relative"><img alt="A person in a video call" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute top-4 left-4"><span class="bg-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Curso Destacado</span></div><div class="absolute bottom-4 left-4 text-white"><h3 class="font-bold text-xl mb-1">Gestión de Personas en Teletrabajo</h3><p class="text-sm opacity-80">Descubre las claves para liderar equipos remotos.</p></div></div></div>
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg course-card cursor-pointer" data-course="2"><div class="relative"><img alt="Hands typing on a laptop" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute top-4 left-4"><span class="bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Nuevo Ingreso</span></div><div class="absolute bottom-4 left-4 text-white"><h3 class="font-bold text-xl mb-1">Estrategias de Negociación</h3><p class="text-sm opacity-80">Domina el arte de la negociación y potencia tus habilidades.</p></div></div></div>
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg course-card cursor-pointer" data-course="3"><div class="relative"><img alt="Paper with Storytelling written on it" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute top-4 left-4"><span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Popular</span></div><div class="absolute bottom-4 left-4 text-white"><h3 class="font-bold text-xl mb-1">Storytelling y Marketing</h3><p class="text-sm opacity-80">Aprende a contar historias impactantes para tu audiencia.</p></div></div></div>
+                    </div>
+                </section>
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Contenido Tendencia</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg course-card"><div class="relative"><img alt="Abstract cloud computing graphic" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZ_najq744Eaq4dPOBWfs9sHc3DkDv6Q9P48zUKWf0l-ChXJC7DE9opNH29jYKKc3etroLaF9rdeIIFzBiNz08Dbz48_e3DDVDaSZtApt1gtdcG0qWiCcEjnGL1f40jvG4ITbHP0xEXXuC0bX5djJUkpcDcN_wRslVpObpxxX3pXxuNgseYebR3Tq40_zZ27Uf5EqR_ZRSTW7ETwEwZCbeaod90rN0QQN81f9i_ZV_p5a93ghnUeGrS9G2hNi5JuC9D5iQkRTC5w"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute top-4 left-4"><span class="bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Tendencia</span></div><div class="absolute bottom-4 left-4 text-white"><h3 class="font-bold text-xl mb-1">Introducción a Cloud Computing</h3><p class="text-sm opacity-80">Entiende los fundamentos de la nube y sus servicios.</p></div></div></div>
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg course-card"><div class="relative"><img alt="Stock market chart" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA57_WSxuynjUV73rSNR_RDZo73y6pE1VcJ2lgPf3fBIHz4PL5VDrX_ApsKVwW0UDzAHQ9JP6sRDN9vZunnk4MA4q2_kT8bCAFmjOYGJOxWWZ26ZBJ7QUTdnuUkqDh3mVCcIUErLN6SzTa-T1zMHkNBd-ET53vbD33zr1WWkzmWGx_q5SMRypApmC3_3dyJfAx2SSH4YFhLARr-0H6Hko3pp4RspmptRogssXu42og-FHJmDsBLQdcIKa_y4LPNzA5zciID2eQRjnU"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute top-4 left-4"><span class="bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Tendencia</span></div><div class="absolute bottom-4 left-4 text-white"><h3 class="font-bold text-xl mb-1">Tendencias del Marketing Digital</h3><p class="text-sm opacity-80">Conoce las últimas tendencias en marketing digital.</p></div></div></div>
+                        <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-lg course-card"><div class="relative"><img alt="Couple smiling" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnB32sPPUhwzavf348GMka6WbAfvcgyXn5q1Uje1NlOe94WWpPFXhY34LsKNhk58S93h6_UywPfGByi4NGUVmxC3X157WJol-1wsL7Q_9kUFxdNYu5Nr-OFmalAw9ZbzbycQMBp0P1ld8yxxLIlbY3ZWsZn4R_MP8VoH5bc8XQ9uv7kFeDRB7M8ROp0xulerUcy2lAeBWsfvAVtsmrie0tADLZdvqQ6hY-0jUo6hmWwsdYPd8VYWQbRgml3LogaKFBeqW-Rg-4J5k"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute top-4 left-4"><span class="bg-pink-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">Tendencia</span></div><div class="absolute bottom-4 left-4 text-white"><h3 class="font-bold text-xl mb-1">Estrategias de Persuasión</h3><p class="text-sm opacity-80">Domina técnicas de persuasión efectivas.</p></div></div></div>
+                    </div>
+                </section>
+                <h2 class="text-2xl font-bold mb-4">Descubrir Microcursos</h2>
+                <div class="mb-6 flex flex-wrap items-center gap-4" id="category-filters">
+                    <button class="bg-primary text-white px-4 py-2 rounded-full font-semibold btn-interactive">Todos</button>
+                    <button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Tecnología</button>
+                    <button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Negocios</button>
+                    <button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Habilidades Blandas</button>
+                    <button class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 btn-interactive">Diseño</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Gestión de Personas en Teletrabajo" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew"/><span class="absolute top-2 right-2 bg-primary/80 text-white text-xs font-semibold px-2 py-1 rounded-full">En Progreso</span></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Gestión de Personas en Teletrabajo</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Aprende a liderar equipos remotos de forma efectiva y humana.</p><div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mb-4"><div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div></div><div class="flex justify-between items-center text-sm"><span class="font-semibold text-primary">60% completado</span><button class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Continuar</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Estrategias Directivas y de Negociación" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Estrategias de Negociación</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Domina el arte de la negociación para cerrar acuerdos exitosos.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">Gratis</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Storytelling y Marketing de Contenido" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM"/><span class="absolute top-2 right-2 bg-accent/80 text-white text-xs font-semibold px-2 py-1 rounded-full">Recomendado</span></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Storytelling y Marketing</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Crea narrativas que conecten y vendan tus productos o ideas.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$49.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Introducción a Cloud Computing" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSZ_najq744Eaq4dPOBWfs9sHc3DkDv6Q9P48zUKWf0l-ChXJC7DE9opNH29jYKKc3etroLaF9rdeIIFzBiNz08Dbz48_e3DDVDaSZtApt1gtdcG0qWiCcEjnGL1f40jvG4ITbHP0xEXXuC0bX5djJUkpcDcN_wRslVpObpxxX3pXxuNgseYebR3Tq40_zZ27Uf5EqR_ZRSTW7ETwEwZCbeaod90rN0QQN81f9i_ZV_p5a93ghnUeGrS9G2hNi5JuC9D5iQkRTC5w"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Introducción a Cloud Computing</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Entiende los fundamentos de la nube y sus principales servicios.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$99.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Tendencias del Marketing Digital" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA57_WSxuynjUV73rSNR_RDZo73y6pE1VcJ2lgPf3fBIHz4PL5VDrX_ApsKVwW0UDzAHQ9JP6sRDN9vZunnk4MA4q2_kT8bCAFmjOYGJOxWWZ26ZBJ7QUTdnuUkqDh3mVCcIUErLN6SzTa-T1zMHkNBd-ET53vbD33zr1WWkzmWGx_q5SMRypApmC3_3dyJfAx2SSH4YFhLARr-0H6Hko3pp4RspmptRogssXu42og-FHJmDsBLQdcIKa_y4LPNzA5zciID2eQRjnU"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Tendencias del Marketing Digital</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Conoce las últimas tendencias y avances en marketing digital para destacar en el entorno competitivo.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">Gratis</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Estrategias de persuasión" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnB32sPPUhwzavf348GMka6WbAfvcgyXn5q1Uje1NlOe94WWpPFXhY34LsKNhk58S93h6_UywPfGByi4NGUVmxC3X157WJol-1wsL7Q_9kUFxdNYu5Nr-OFmalAw9ZbzbycQMBp0P1ld8yxxLIlbY3ZWsZn4R_MP8VoH5bc8XQ9uv7kFeDRB7M8ROp0xulerUcy2lAeBWsfvAVtsmrie0tADLZdvqQ6hY-0jUo6hmWwsdYPd8VYWQbRgml3LogaKFBeqW-Rg-4J5k"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Estrategias de Persuasión</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Domina técnicas de persuasión para influir en decisiones y lograr tus objetivos.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$29.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Innovación y Emprendedurismo en la Industria Gastronómica" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoRFQfFoAcz9azV6Ksl9ASvee8u3iLkpQSBGDeJHKyDBYjdwdCOQWZ8Y56k-Jd5DkZxzti_cvv9P0LQV3OW1sHmGP8WryulSf2wis9Pb3Nufd0mcJpvUO2yeVs9WUsWOVrgbd9AUioyJcVdZNpTLw8l_TMo7ohqxEMgoqHbfyV0iwFmzwXGIAifFh683_T3mgCEapqWxgj8OC2u9Wg81Mqva8_AVmG8Cjr_Onb5kCQyU_1NUDz7xrimht9RSehT7gK2bZTB2OgMvc"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Innovación y Emprendedurismo en la Industria Gastronómica</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Explora la innovación y el emprendedurismo en el sector gastronómico.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">Gratis</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Taller de lecto escritura" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChC4dQ27wwz7Ut5e2B2yWsCtHcX-ozBLlCvPM3827-EM2CovdTmkgeQFlYOxXIRnkA9RpmtF8oe3SUB_A43-_sGPp5ljokLK6YNq1Dsjjb-EMnqXeubq9vnYW_jCDKEy8F2PECIJHxgqmvO5RjVelX_wQtQwoKrPDDirLKWk3l2JDucDPZ9eJqYonQnFwZte5tXAA_XFYzNIwcuTZflw5ogKkKXlb2X9J1wN_UJ6u06AmvGfvMj7u4O2Sg5G-WLjNJLhtiOPOfwtg"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Taller de Lectoescritura</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Mejora tus habilidades de lectura y escritura para potenciar tu vida personal y profesional.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$19.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Aprendizaje permanente" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3k8lWA-jgtBjv8iGo2DY6CHbVmv03T52jI0nISgvjqpyNQU2wdmv-YqucN3t76g8-AKXe8kBmqz4cF0Wb6IF9D1xNxU25Woqm2VGOYJ16pEULBw2-kXT5VvGM4In7oyuiRKBxo0NtuVQZ3d_CyfyQiK_xEsJO8H-eBPLUzjWt8cQtiW2BBmr6pU0SxqDGh96I2HHNAtA9IMN8zYj3AT-ZtGWtdwL1o1VpUoZk-1XJ0Z3bk01StH_Bm-S4B-E38CUkC_C5QPHDlbI"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Aprendizaje Permanente</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Adopta el aprendizaje continuo para adaptarte a entornos dinámicos y desarrollar nuevas habilidades.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">Gratis</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Transformación Disruptiva para Universidades" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOZdUdpwIV_1K4kMf4R0z8BzNgqU2K9NWve1qcY0n9EPPGr7AcMtdMUq0aX6pTu7fClZiupqMUHR-dnSPr7UOcBk4fEB3VJYyZXKKCxgwrUX8wYrAhEVwYMAQ6GM2dEThqeYYbNhksXJFrCtX7HTfm_VEGOEQJNDSdlSBhSmtywa0Nu8vARPleHE9N_I2VkUi2RdYmmkBUzuDrZRNtItfNdimpSwfsYqn4xwur1J8Zy2TQD6wH7pkJJTInfemwZpYJFXkzVnUoiKg"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Transformación Disruptiva para Universidades</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Explora la transformación disruptiva en la educación superior.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$39.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Bioquímica Avanzada" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoXWv3whzL4wI3lmdO3vpKT7WpMnGEseDyzBWmdMzZbN_-qPnoIQJRABxDFhR6QutKR_UgcUC3J78giRG4T2nyFXHlpFRulCxTyFrtrD7oTbGnQ_sFgeMSYZJCXW0Gf-gVR74LmWCrjSHcU_JSpP-BfMCB-j1s6NhaysqxqUYLmEYnQdww4BffffvUNk-AnM4oxdeyzJxWXJEzzvtFaNAKYVAcKPQyyaSSIm5oZqNxcpoOhv_SW0Af_DUWUxcc5CxpOf6t_fzbEqE"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Bioquímica Avanzada</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Estudia los procesos químicos en los seres vivos y sus elementos fundamentales.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$59.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
+                    <div class="bg-card-light dark:bg-card-dark rounded-lg overflow-hidden shadow-sm course-card"><div class="relative"><img alt="Patología del Aparato Digestivo" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYrAW8ZZ0AiCgBZy8rXQz4aGEh_6Vm13FElsT0kgt5SZnXyT3_NN-RrAnv4nNdwmVZWKoIxkmvVt487F_FxUmibGJk89Jvb-55nkZtMvuXF-RnLlO0-IJJ2YvPT23N9VtrrO-Lh-ObHHM2T-kB8bEn8nY9bugJDLR4hggh-jlQlxkIy7KT0bk71HSGaKg2WHWhTl4CClHCXxqe8i9r1Kz_qAJs5AaVwhlznbt0rFYRQCw-fGAdi2JyscOmjiZ4Xkw_w8sPxgvLySo"/></div><div class="p-4"><h3 class="font-bold text-lg mb-2">Patología del Aparato Digestivo</h3><p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-4 line-clamp-2">Aprende sobre las patologías del aparato digestivo y su diagnóstico.</p><div class="flex justify-between items-center text-sm"><span class="font-bold text-lg text-text-light dark:text-text-dark">$49.99</span><button class="enroll-button bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary transition-colors btn-interactive">Inscribirme</button></div></div></div>
                 </div>
             </div>
         </div>
     </main>
 </div>
 
+<!-- Certifications Modal -->
+<div id="certs-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+    <div class="modal-content bg-card-light dark:bg-card-dark rounded-lg shadow-xl w-full max-w-2xl p-6 transform scale-95 opacity-0">
+        <div class="flex justify-between items-center border-b border-border-light dark:border-border-dark pb-3 mb-4">
+            <h2 class="text-2xl font-bold">Mis Certificaciones</h2>
+            <button id="close-modal-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+            <!-- Certificate Items -->
+            <div class="flex items-center p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                <span class="material-symbols-outlined text-4xl text-blue-500 mr-4">school</span>
+                <div>
+                    <h3 class="font-semibold">Liderazgo Ágil</h3>
+                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Emitido: 15/03/2024</p>
+                </div>
+                <a href="#" class="ml-auto bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm btn-interactive">Ver Credencial</a>
+            </div>
+            <div class="flex items-center p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                <span class="material-symbols-outlined text-4xl text-green-500 mr-4">bar_chart</span>
+                <div>
+                    <h3 class="font-semibold">Análisis de Datos con Python</h3>
+                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Emitido: 02/02/2024</p>
+                </div>
+                <a href="#" class="ml-auto bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm btn-interactive">Ver Credencial</a>
+            </div>
+            <div class="flex items-center p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                <span class="material-symbols-outlined text-4xl text-purple-500 mr-4">code</span>
+                <div>
+                    <h3 class="font-semibold">Desarrollo Web Full-Stack</h3>
+                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Emitido: 10/01/2024</p>
+                </div>
+                <a href="#" class="ml-auto bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm btn-interactive">Ver Credencial</a>
+            </div>
+            <div class="flex items-center p-4 border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                <span class="material-symbols-outlined text-4xl text-amber-500 mr-4">design_services</span>
+                <div>
+                    <h3 class="font-semibold">Diseño de Experiencia de Usuario (UX)</h3>
+                    <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Emitido: 18/11/2023</p>
+                </div>
+                <a href="#" class="ml-auto bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm btn-interactive">Ver Credencial</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Badge Modal -->
+<div id="badge-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+    <div class="modal-content bg-card-light dark:bg-card-dark rounded-lg shadow-xl w-full max-w-md p-6 transform scale-95 opacity-0">
+        <div class="flex justify-between items-center border-b border-border-light dark:border-border-dark pb-3 mb-4">
+            <h2 class="text-2xl font-bold">¡Insignia Conquistada!</h2>
+            <button id="close-badge-modal-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="text-center">
+            <img id="badge-modal-img" src="" alt="" class="w-48 h-48 mx-auto mb-4 rounded-lg shadow-lg">
+            <p id="badge-modal-title" class="text-xl font-semibold mb-2"></p>
+            <p class="text-text-secondary-light dark:text-text-secondary-dark mb-4">¡Felicidades! Esta insignia representa tu dedicación y esfuerzo. Sigue aprendiendo para desbloquear más logros.</p>
+            <button id="close-badge-modal-bottom-btn" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors">¡Continuar Aprendiendo!</button>
+        </div>
+    </div>
+</div>
+
+<!-- Course Modal -->
+<div id="course-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+    <div class="modal-content bg-card-light dark:bg-card-dark rounded-lg shadow-xl w-full max-w-4xl p-6 transform scale-95 opacity-0 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center border-b border-border-light dark:border-border-dark pb-3 mb-4">
+            <h2 id="course-modal-title" class="text-2xl font-bold"></h2>
+            <button id="close-course-modal-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <img id="course-modal-img" src="" alt="" class="w-full h-56 object-cover rounded-lg mb-4">
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-semibold text-lg">Descripción</h3>
+                        <p id="course-modal-description" class="text-text-secondary-light dark:text-text-secondary-dark"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg">Duración</h3>
+                        <p id="course-modal-duration" class="text-text-secondary-light dark:text-text-secondary-dark"></p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg">Precio</h3>
+                        <p id="course-modal-price" class="text-text-secondary-light dark:text-text-secondary-dark"></p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-semibold text-lg mb-4">Módulos del Curso</h3>
+                <ul id="course-modal-modules" class="space-y-2">
+                    <!-- Modules will be populated here -->
+                </ul>
+                <button id="enroll-course-btn" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors mt-6">Inscribirme al Curso</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Navigation --- 
-    const navDashboard = document.getElementById('nav-dashboard');
-    const navDiscover = document.getElementById('nav-discover');
-    const dashboardView = document.getElementById('dashboard-view');
-    const discoverView = document.getElementById('discover-view');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    function setActiveLink(activeLink) {
-        navLinks.forEach(link => link.classList.remove('active'));
-        activeLink.classList.add('active');
-    }
-
-    navDashboard.addEventListener('click', (e) => {
-        e.preventDefault();
-        setActiveLink(navDashboard);
-        dashboardView.classList.remove('hidden');
-        discoverView.classList.add('hidden');
-    });
-
-    navDiscover.addEventListener('click', (e) => {
-        e.preventDefault();
-        setActiveLink(navDiscover);
-        discoverView.classList.remove('hidden');
-        dashboardView.classList.add('hidden');
-    });
-
-    // Set default view
-    setActiveLink(navDiscover);
-    dashboardView.classList.add('hidden');
-    discoverView.classList.remove('hidden');
-
-    // --- Other interactions ---
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
     const htmlElement = document.documentElement;
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    
+    // --- Dark Mode ---
     if (localStorage.getItem('darkMode') === 'enabled') {
         htmlElement.classList.add('dark');
         darkModeToggle.checked = true;
@@ -260,66 +1070,535 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('darkMode', htmlElement.classList.contains('dark') ? 'enabled' : 'disabled');
     });
 
+    // --- Mobile Sidebar ---
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementById('sidebar-toggle');
-    sidebarToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.toggle('-translate-x-full'); });
-    document.addEventListener('click', (e) => { if (window.innerWidth < 768 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) { sidebar.classList.add('-translate-x-full'); } });
-
-    const notificationsToggle = document.getElementById('notifications-toggle');
-    const notificationsPanel = document.getElementById('notifications-panel');
-    notificationsToggle.addEventListener('click', (e) => { e.stopPropagation(); notificationsPanel.classList.toggle('hidden'); });
-    document.addEventListener('click', (e) => { if (!notificationsPanel.contains(e.target) && !notificationsToggle.contains(e.target)) { notificationsPanel.classList.add('hidden'); } });
-
-    const categoryFilters = document.getElementById('category-filters');
-    const coursesContainer = document.getElementById('courses-container');
-    const courseCards = Array.from(coursesContainer.children);
-
-    categoryFilters.addEventListener('click', (e) => {
-        if (e.target.tagName === 'BUTTON') {
-            categoryFilters.querySelector('.bg-primary')?.classList.replace('bg-primary', 'bg-card-light');
-            categoryFilters.querySelector('.text-white')?.classList.replace('text-white', 'text-text-light');
-            e.target.classList.replace('bg-card-light', 'bg-primary');
-            e.target.classList.replace('text-text-light', 'text-white');
-            const category = e.target.dataset.category;
-            courseCards.forEach(card => {
-                card.style.display = 'none';
-                if (!category || card.dataset.category === category) {
-                    setTimeout(() => { card.style.display = 'block'; }, 10);
-                }
-            });
+    sidebarToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('-translate-x-full');
+    });
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth < 768 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            sidebar.classList.add('-translate-x-full');
         }
     });
 
-    const enrollButtons = document.querySelectorAll('.enroll-button');
-    enrollButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            button.textContent = 'Ir al Curso';
-            button.classList.replace('bg-primary-dark', 'bg-green-600');
-            button.disabled = true;
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg';
-            toast.textContent = '¡Inscripción exitosa!';
-            document.body.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 3000);
+    // --- View Navigation ---
+    const navDashboard = document.getElementById('nav-dashboard');
+    const navProgress = document.getElementById('nav-progress');
+    const navEnCurso = document.getElementById('nav-en-curso');
+    const navDiscover = document.getElementById('nav-discover');
+    const mainNav = document.getElementById('main-nav');
+    const panelPrincipalView = document.getElementById('panel-principal-view');
+    const progresoView = document.getElementById('progreso-view');
+    const enCursoView = document.getElementById('en-curso-view');
+    const courseView = document.getElementById('course-view');
+    const descubrirCursosView = document.getElementById('descubrir-cursos-view');
+    const progressBars = document.querySelectorAll('.progress-bar-fill');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                bar.style.width = bar.dataset.value + '%';
+                observer.unobserve(bar);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    function switchView(view) {
+        mainNav.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        panelPrincipalView.classList.add('hidden');
+        progresoView.classList.add('hidden');
+        enCursoView.classList.add('hidden');
+        courseView.classList.add('hidden');
+        descubrirCursosView.classList.add('hidden');
+
+        if (view === 'dashboard') {
+            panelPrincipalView.classList.remove('hidden');
+            navDashboard.classList.add('active');
+            progressBars.forEach(bar => observer.observe(bar));
+        } else if (view === 'progress') {
+            progresoView.classList.remove('hidden');
+            navProgress.classList.add('active');
+            progressBars.forEach(bar => observer.observe(bar));
+        } else if (view === 'en-curso') {
+            enCursoView.classList.remove('hidden');
+            navEnCurso.classList.add('active');
+            progressBars.forEach(bar => observer.unobserve(bar));
+        } else if (view === 'course') {
+            courseView.classList.remove('hidden');
+            // No nav active for course view
+            progressBars.forEach(bar => observer.unobserve(bar));
+        } else {
+            descubrirCursosView.classList.remove('hidden');
+            navDiscover.classList.add('active');
+            progressBars.forEach(bar => observer.unobserve(bar));
+        }
+    }
+
+    navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchView('dashboard'); });
+    navProgress.addEventListener('click', (e) => { e.preventDefault(); switchView('progress'); });
+    navEnCurso.addEventListener('click', (e) => { e.preventDefault(); switchView('en-curso'); });
+    navDiscover.addEventListener('click', (e) => { e.preventDefault(); switchView('discover'); });
+    
+    // Set default view
+    switchView('discover');
+
+    // --- Certifications Modal ---
+    const modal = document.getElementById('certs-modal');
+    const openModalBtn = document.getElementById('view-all-certs-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalContent = document.querySelector('.modal-content');
+
+    const openModal = () => {
+        modal.classList.remove('pointer-events-none');
+        modalOverlay.classList.remove('opacity-0');
+        modalContent.classList.remove('opacity-0', 'scale-95');
+    };
+
+    const closeModal = () => {
+        modalOverlay.classList.add('opacity-0');
+        modalContent.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => modal.classList.add('pointer-events-none'), 300);
+    };
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // --- Badge Modal ---
+    const badgeModal = document.getElementById('badge-modal');
+    const badgeModalOverlay = badgeModal;
+    const badgeModalContent = badgeModal.querySelector('.modal-content');
+    const closeBadgeModalBtn = document.getElementById('close-badge-modal-btn');
+    const closeBadgeModalBottomBtn = document.getElementById('close-badge-modal-bottom-btn');
+    const badgeModalImg = document.getElementById('badge-modal-img');
+    const badgeModalTitle = document.getElementById('badge-modal-title');
+    const badgeItems = document.querySelectorAll('.badge-item');
+
+    const openBadgeModal = (src, alt, title) => {
+        badgeModalImg.src = src;
+        badgeModalImg.alt = alt;
+        badgeModalTitle.textContent = title;
+        badgeModalImg.classList.remove('zoomed'); // Reset zoom
+        badgeModal.classList.remove('pointer-events-none');
+        badgeModalOverlay.classList.remove('opacity-0');
+        badgeModalContent.classList.remove('opacity-0', 'scale-95');
+    };
+
+    const closeBadgeModal = () => {
+        badgeModalOverlay.classList.add('opacity-0');
+        badgeModalContent.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => badgeModal.classList.add('pointer-events-none'), 300);
+    };
+
+    badgeItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const src = item.dataset.src;
+            const alt = item.dataset.alt;
+            const title = item.querySelector('p').textContent;
+            openBadgeModal(src, alt, title);
         });
     });
 
-    document.getElementById('logout-button').addEventListener('click', () => {
-        if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-            alert('Has cerrado sesión. Serás redirigido a la página de inicio.');
-        }
+    // Zoom effect on image click
+    badgeModalImg.addEventListener('click', () => {
+        badgeModalImg.classList.toggle('zoomed');
     });
 
-    document.getElementById('view-all-certs').addEventListener('click', (e) => {
+    closeBadgeModalBtn.addEventListener('click', closeBadgeModal);
+    closeBadgeModalBottomBtn.addEventListener('click', closeBadgeModal);
+    badgeModal.addEventListener('click', (e) => {
+        if (e.target === badgeModal) closeBadgeModal();
+    });
+
+    // --- Course Modal ---
+    const courseData = {
+        1: {
+            title: 'Gestión de Personas en Teletrabajo',
+            description: 'Aprende a liderar equipos remotos de forma efectiva y humana. Este curso te proporciona las herramientas necesarias para gestionar el talento en entornos de teletrabajo, fomentando la productividad, el bienestar y la cohesión del equipo.',
+            duration: '4 semanas',
+            price: 'Gratis',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD7OFWFEfi6q4dhSV39-Pb-ZPXAjCt0Wyyim8D48eMclTupH03XdgLtZvKwO6rVUulR3ft5vH4Up3QJMAahtO-LXWqK4aesXOch5Qy0GLIB0ZTcbzHqqON93W2xvChEUxSQMzGIjDgdhI6KDr-wR4XaUTaDyj1caWMHTyzTIuDNPFXFcZU4lBa3727rNkE-zWBWvvGGxmut_GIlmI3kkKaGU8sXk2HVrM0TJEtiWTMZHmH1Db2XbP-p0fSGuwnzvkp6B7hNca5Q_ew',
+            modules: [
+                {
+                    title: 'Introducción al Teletrabajo',
+                    lessons: [
+                        '¿Qué es el teletrabajo?',
+                        'Ventajas y desafíos del teletrabajo',
+                        'Tendencias actuales del trabajo remoto'
+                    ]
+                },
+                {
+                    title: 'Comunicación Efectiva en Equipos Remotos',
+                    lessons: [
+                        'Herramientas de comunicación digital',
+                        'Técnicas para reuniones virtuales efectivas',
+                        'Manejo de la comunicación asíncrona'
+                    ]
+                },
+                {
+                    title: 'Gestión del Rendimiento y Productividad',
+                    lessons: [
+                        'Estableciendo expectativas claras',
+                        'Monitoreo del progreso sin micromanagement',
+                        'Motivación en entornos remotos'
+                    ]
+                },
+                {
+                    title: 'Bienestar Emocional y Prevención del Burnout',
+                    lessons: [
+                        'Reconociendo señales de burnout',
+                        'Estrategias para mantener el equilibrio trabajo-vida',
+                        'Fomentando la cultura del bienestar'
+                    ]
+                },
+                {
+                    title: 'Herramientas y Tecnologías para el Teletrabajo',
+                    lessons: [
+                        'Plataformas de colaboración',
+                        'Herramientas de gestión de proyectos',
+                        'Seguridad en el trabajo remoto'
+                    ]
+                }
+            ]
+        },
+        2: {
+            title: 'Estrategias de Negociación',
+            description: 'Domina el arte de la negociación para cerrar acuerdos exitosos. Aprende técnicas avanzadas de negociación aplicables en diversos contextos profesionales y personales.',
+            duration: '3 semanas',
+            price: '$49.99',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDCdGh7V0Ets9hjoUtx59bt974XXjI7srY4Z0mvJMQXhye9QlvAEBPoqUwLcqk5ZJT4JGna--hfBMONk3qKAKGa_o2GRP_w0Dyc5QWzZOILmFAQwvg0V5HUTJevMnqyRUp5F8TDW3rKRcRfwT1HKFBUu2rkzveL1L6UO1e3PBNjK_DDGcrOwvtcCPOp2rzrxB8Qg_B9Ds-cvRstVflzP609gWGZFvwWruaD3B67ybuYkbQeLK3bE74X9JLY_GK-GehsOM_HDqarSCk',
+            modules: [
+                {
+                    title: 'Principios Básicos de la Negociación',
+                    lessons: [
+                        'Preparación para la negociación',
+                        'Entendiendo tus objetivos y límites',
+                        'Análisis de la contraparte'
+                    ]
+                },
+                {
+                    title: 'Técnicas Avanzadas de Persuasión',
+                    lessons: [
+                        'Principios de influencia de Cialdini',
+                        'Técnicas de anclaje y framing',
+                        'Uso del lenguaje corporal en negociaciones'
+                    ]
+                },
+                {
+                    title: 'Negociación en Diferentes Contextos',
+                    lessons: [
+                        'Negociaciones comerciales',
+                        'Negociaciones salariales',
+                        'Resolución de conflictos'
+                    ]
+                },
+                {
+                    title: 'Manejo de Conflictos y Objeciones',
+                    lessons: [
+                        'Identificando objeciones comunes',
+                        'Técnicas para superar resistencias',
+                        'Manteniendo la calma bajo presión'
+                    ]
+                },
+                {
+                    title: 'Cierre de Acuerdos Exitosos',
+                    lessons: [
+                        'Señales de cierre',
+                        'Técnicas de cierre efectivas',
+                        'Seguimiento post-negociación'
+                    ]
+                }
+            ]
+        },
+        3: {
+            title: 'Storytelling y Marketing',
+            description: 'Crea narrativas que conecten y vendan tus productos o ideas. Aprende a utilizar el storytelling como herramienta poderosa en estrategias de marketing.',
+            duration: '5 semanas',
+            price: '$99.99',
+            img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD-DAQtuBTqEYyhm2gSwSDk8AToqe7hKasB_MH8zCzANiAJxjpC1gdz7xN8i0uM0_fPtHxvyBgs2a2mZjombm5MDr9se0E4iilkT_J0zyY-e14EOppn1hYH1Ll60MOctgqBhjicRVQsJh3K7NdZN3ve2b-JjFArjodEvIGGO9urtq8cc9i83SM2WmwNz8ZZWh0EvGZYvMFYgj0gmwFbdcl6cAXFTOAuqsFR4ROMAUFnpJ3Wiy4TZlcTNs2AEb5DHE6gVAbSeuWajOM',
+            modules: [
+                {
+                    title: 'Fundamentos del Storytelling',
+                    lessons: [
+                        '¿Qué es el storytelling?',
+                        'Por qué las historias son poderosas',
+                        'Elementos básicos de una historia'
+                    ]
+                },
+                {
+                    title: 'Elementos de una Buena Historia',
+                    lessons: [
+                        'Estructura narrativa clásica',
+                        'Desarrollo de personajes',
+                        'Creando tensión y resolución'
+                    ]
+                },
+                {
+                    title: 'Aplicación del Storytelling en Marketing',
+                    lessons: [
+                        'Storytelling en branding',
+                        'Narrativas en publicidad',
+                        'Historias en contenido digital'
+                    ]
+                },
+                {
+                    title: 'Casos de Estudio Exitosos',
+                    lessons: [
+                        'Análisis de campañas icónicas',
+                        'Lecciones de marcas exitosas',
+                        'Errores comunes y cómo evitarlos'
+                    ]
+                },
+                {
+                    title: 'Creación de Contenido Narrativo',
+                    lessons: [
+                        'Desarrollando tu propia historia de marca',
+                        'Herramientas para crear contenido',
+                        'Adaptación a diferentes plataformas'
+                    ]
+                },
+                {
+                    title: 'Medición del Impacto del Storytelling',
+                    lessons: [
+                        'Métricas de engagement',
+                        'ROI del storytelling',
+                        'Ajustes basados en datos'
+                    ]
+                }
+            ]
+        }
+    };
+
+    let enrolledCourse = null;
+    const courseModalOverlay = courseModal;
+    const courseModalContent = courseModal.querySelector('.modal-content');
+    const closeCourseModalBtn = document.getElementById('close-course-modal-btn');
+    const courseModalTitle = document.getElementById('course-modal-title');
+    const courseModalImg = document.getElementById('course-modal-img');
+    const courseModalDescription = document.getElementById('course-modal-description');
+    const courseModalDuration = document.getElementById('course-modal-duration');
+    const courseModalPrice = document.getElementById('course-modal-price');
+    const courseModalModules = document.getElementById('course-modal-modules');
+    const enrollCourseBtn = document.getElementById('enroll-course-btn');
+
+    const openCourseModal = (courseId) => {
+        const course = courseData[courseId];
+        courseModalTitle.textContent = course.title;
+        courseModalImg.src = course.img;
+        courseModalImg.alt = course.title;
+        courseModalDescription.textContent = course.description;
+        courseModalDuration.textContent = course.duration;
+        courseModalPrice.textContent = course.price;
+        
+        courseModalModules.innerHTML = '';
+        course.modules.forEach(module => {
+            const li = document.createElement('li');
+            li.className = 'flex items-center gap-2';
+            li.innerHTML = `<span class="material-symbols-outlined text-primary">check_circle</span><span>${module.title || module}</span>`;
+            courseModalModules.appendChild(li);
+        });
+        
+        enrollCourseBtn.dataset.courseId = courseId;
+        
+        courseModal.classList.remove('pointer-events-none');
+        courseModalOverlay.classList.remove('opacity-0');
+        courseModalContent.classList.remove('opacity-0', 'scale-95');
+    };
+
+    const closeCourseModal = () => {
+        courseModalOverlay.classList.add('opacity-0');
+        courseModalContent.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => courseModal.classList.add('pointer-events-none'), 300);
+    };
+
+    const featuredCourses = document.querySelectorAll('[data-course]');
+    featuredCourses.forEach(course => {
+        course.addEventListener('click', () => {
+            const courseId = course.dataset.course;
+            openCourseModal(courseId);
+        });
+    });
+
+    closeCourseModalBtn.addEventListener('click', closeCourseModal);
+    courseModal.addEventListener('click', (e) => {
+        if (e.target === courseModal) closeCourseModal();
+    });
+
+    enrollCourseBtn.addEventListener('click', () => {
+        const courseId = enrollCourseBtn.dataset.courseId || '1'; // Default to 1 if not set
+        enrolledCourse = courseData[courseId];
+        enrollCourseBtn.textContent = 'Ir al Curso';
+        enrollCourseBtn.classList.remove('bg-primary');
+        enrollCourseBtn.classList.add('bg-green-600');
+        
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg animate-bounce';
+        toast.textContent = '¡Inscripción exitosa!';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+        setTimeout(() => {
+            closeCourseModal();
+            switchView('course');
+            populateCourseView();
+        }, 1000);
+    });
+
+    // --- Course View ---
+    const backToDiscoverBtn = document.getElementById('back-to-discover-btn');
+    const courseViewTitle = document.getElementById('course-view-title');
+    const courseViewImg = document.getElementById('course-view-img');
+    const courseViewDuration = document.getElementById('course-view-duration');
+    const courseViewDescription = document.getElementById('course-view-description');
+    const courseViewModules = document.getElementById('course-view-modules');
+
+    const populateCourseView = () => {
+        if (!enrolledCourse) return;
+        
+        courseViewTitle.textContent = enrolledCourse.title;
+        courseViewImg.src = enrolledCourse.img;
+        courseViewImg.alt = enrolledCourse.title;
+        courseViewDuration.textContent = enrolledCourse.duration;
+        courseViewDescription.textContent = enrolledCourse.description;
+        
+        courseViewModules.innerHTML = '';
+        enrolledCourse.modules.forEach((module, moduleIndex) => {
+            const moduleDiv = document.createElement('div');
+            moduleDiv.className = 'bg-card-light dark:bg-card-dark rounded-lg p-6 shadow-sm mb-4';
+            
+            const moduleHeader = document.createElement('div');
+            moduleHeader.className = 'flex items-center justify-between mb-4';
+            moduleHeader.innerHTML = `
+                <h3 class="text-xl font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">school</span>
+                    Módulo ${moduleIndex + 1}: ${module.title}
+                </h3>
+                <span class="text-sm text-text-secondary-light dark:text-text-secondary-dark">${module.lessons.length} lecciones</span>
+            `;
+            
+            const lessonsList = document.createElement('div');
+            lessonsList.className = 'space-y-2';
+            module.lessons.forEach((lesson, lessonIndex) => {
+                const lessonDiv = document.createElement('div');
+                lessonDiv.className = 'flex items-center gap-3 p-3 bg-background-light dark:bg-background-dark rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors cursor-pointer';
+                lessonDiv.innerHTML = `
+                    <span class="material-symbols-outlined text-primary">play_circle</span>
+                    <div class="flex-1">
+                        <p class="font-medium">${lesson}</p>
+                        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Lección ${lessonIndex + 1}</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">chevron_right</span>
+                `;
+                lessonsList.appendChild(lessonDiv);
+            });
+            
+            moduleDiv.appendChild(moduleHeader);
+            moduleDiv.appendChild(lessonsList);
+            courseViewModules.appendChild(moduleDiv);
+        });
+    };
+
+    backToDiscoverBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const container = document.getElementById('certifications-container');
-        const newCert = document.createElement('div');
-        newCert.className = 'text-center animate-pulse';
-        newCert.innerHTML = `<span class="material-symbols-outlined text-5xl text-purple-500">code</span><p class="font-semibold mt-1">Desarrollo Web</p><p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Emitido: 10/01/24</p>`;
-        container.insertBefore(newCert, e.target);
-        e.target.textContent = 'Mostrar menos';
+        switchView('discover');
+    });
+    const enrollButtons = document.querySelectorAll('.enroll-button');
+    enrollButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Find the course card and extract course info
+            const courseCard = button.closest('.course-card');
+            const courseTitle = courseCard.querySelector('h3').textContent;
+            const courseImg = courseCard.querySelector('img').src;
+            const courseDescription = courseCard.querySelector('p.line-clamp-2') ? courseCard.querySelector('p.line-clamp-2').textContent : '';
+            
+            // Create a mock course object (in a real app, this would come from a database)
+            enrolledCourse = {
+                title: courseTitle,
+                img: courseImg,
+                description: courseDescription,
+                duration: '4 semanas', // Default duration
+                modules: [
+                    {
+                        title: 'Introducción',
+                        lessons: ['Bienvenida', 'Objetivos del curso', 'Metodología']
+                    },
+                    {
+                        title: 'Contenido Principal',
+                        lessons: ['Lección 1', 'Lección 2', 'Lección 3']
+                    },
+                    {
+                        title: 'Aplicación Práctica',
+                        lessons: ['Ejercicio 1', 'Proyecto Final']
+                    }
+                ]
+            };
+            
+            button.textContent = 'Ir al Curso';
+            button.classList.remove('bg-primary-dark');
+            button.classList.add('bg-green-600');
+            
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg animate-bounce';
+            toast.textContent = '¡Inscripción exitosa!';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+            
+            // Navigate to course view after a delay
+            setTimeout(() => {
+                switchView('course');
+                populateCourseView();
+            }, 1500);
+        });
+    });
+
+    // --- Notification Dropdown ---
+    const notificationBtn = document.getElementById('notification-btn');
+    const notificationDropdown = document.getElementById('notification-dropdown');
+    notificationBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notificationDropdown.classList.toggle('hidden');
+    });
+
+    // --- User Menu Dropdown ---
+    const userMenuBtn = document.getElementById('user-menu-btn');
+    const userDropdown = document.getElementById('user-dropdown');
+    userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+    });
+
+    // --- Search Functionality ---
+    const searchInput = document.querySelector('input[placeholder="Buscar microcursos..."]');
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const courses = document.querySelectorAll('.course-card');
+        
+        if (query === '') {
+            // Show all courses
+            courses.forEach(card => {
+                card.style.display = 'block';
+            });
+            return;
+        }
+        
+        courses.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('p.line-clamp-2') ? card.querySelector('p.line-clamp-2').textContent.toLowerCase() : '';
+            
+            if (title.includes(query) || description.includes(query)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     });
 });
 </script>
+
 </body>
 </html>
